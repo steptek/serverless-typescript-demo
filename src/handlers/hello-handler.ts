@@ -1,4 +1,4 @@
-import { ICallback, IEventPayload } from './models';
+import { ICallback, IEventPayload } from './../../models';
 import { Kinesis } from 'aws-sdk';
 import { Context, Callback } from 'aws-lambda';
 import * as uuid from 'uuid';

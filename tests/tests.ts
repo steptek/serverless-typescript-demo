@@ -1,4 +1,4 @@
-import { hello } from './handler';
+import { hello } from './../src/handlers/hello-handler';
 import * as chai from 'chai';
 const expect = chai.expect;
 import * as assert from 'power-assert';
