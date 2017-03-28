@@ -4,6 +4,12 @@
   "description": "Basic demo mixing Serverless and TypeScript",
   "main": "handler.ts",
   "scripts": {
+    "start": "export NODE_ENV='development' && node ./dist/bin/www",
+    "generate-proxy": "claudia generate-serverless-express-proxy --express-module app",
+    "sls-local": "serverless --host 0.0.0.0 offline start",
+    "run-local": "node -e \"require('./lambda.js').handler(require('./api-gateway-event.json'), {succeed: v => { console.log(v); process.exit(0); }}, (e, v) => { console.log(v); process.exit(1); })\"",
+    "deploy": "sls deploy",
+
     "lint": "tslint *.ts",
     "test:local": "mocha --compilers ts:ts-node/register,tsx:ts-node/register tests.ts",
     "test:remote": ". ./helpers/endpoint.sh; mocha remote/tests.js",
@@ -29,11 +35,31 @@
     "karma-webpack": "^1.8.0",
     "mocha": "^3.1.2",
     "phantomjs-prebuilt": "^2.1.13",
+    "serverless-webpack":"latest",
     "serverless-webpack": "^1.0.0-rc.2",
     "ts-loader": "^0.9.4",
     "tslint": "^3.15.1",
     "tslint-config-olo": "^0.1.0",
     "typescript": "^2.0.3",
-    "webpack": "^1.13.2"
-  }
+    "webpack": "^1.13.2",
+    
+    "aws-serverless-express": "^2.1.0",
+    "body-parser": "^1.15.2",
+    "cors": "^2.8.1",
+    "compression": "^1.6.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "ejs": "~2.5.2",
+    "express": "~4.14.0",
+    "morgan": "~1.7.0",
+    "serve-favicon": "~2.3.0"
+  },
+  "keywords": [
+    "express",
+    "serverless",
+    "lambda",
+    "AWS",
+    "API",
+    "gateway"
+  ]
 }

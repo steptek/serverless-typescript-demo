@@ -12,37 +12,18 @@ provider:
           - "kinesis:*"
   environment:
       KINESIS_STREAM: ${opt:stage, self:provider.stage}-data-receiver
+      NODE_ENV: production
+      basePath: dev/
+  cfLogs: true
 
 plugins:
   - serverless-webpack
 
 functions:
-  hello:
-    handler: handler.hello
+  cars:
+    handler: handler.cars
     events:
-     - http:
-         path: hello
+      - http:
+         path: index
          method: get
-
-  dataReceiver:
-    handler: handler.dataReceiver
-
-  logger:
-    handler: handler.logger
-    events:
-      - stream:
-        type: kinesis
-        arn:
-          Fn::GetAtt:
-            - ResourcesKinesisStream
-            - Arn
-        batchSize: 1
-
-resources:
-  Resources:
-    ResourcesKinesisStream:
-      Type: AWS::Kinesis::Stream
-      Properties:
-        Name: ${self:provider.environment.KINESIS_STREAM}
-        ShardCount: 1
-
+         integration: lambda-proxy
