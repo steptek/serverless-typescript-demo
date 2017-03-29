@@ -3,6 +3,23 @@
 This is a very basic project demonstrating how to build a Serverless application using TypeScript, including linting and tests. You can refer to [this blog post](https://gregshackles.com/getting-started-with-serverless-and-typescript/) as a walkthrough of the code here.
 For more info about Serverless: https://serverless.com/
 
+
+# Local Api on serverless mode.
+To make it run localy:
+```
+npm install
+npm run start
+```
+
+
+To test it:
+```
+http://localhost:3000/offers?term=houses    : gives json response for houses example.
+http://localhost:3000/offers?term=cars      : gives json response for cars example.
+http://localhost:3000/offers? [nothing]     : error message.
+```
+
+
 ## Define your aws credentials with the profile TEKsystems
 edit ~/.aws/credentials
 
