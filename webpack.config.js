@@ -1,14 +1,21 @@
+var webpack = require("webpack")
 var path = require('path');
 var nodeExternals = require('webpack-node-externals');
 
 module.exports = {
-  entry: './src/handler.ts',
+  entry: './handler.ts',
+// multiple  lambda functions.
+ /*entry: { 
+        'function1/handler': './function1/lambda',
+        'function2/handler': './function2/lambda'
+    },*/
+
   target: 'node',
- externals: [nodeExternals()], 
+  externals: [nodeExternals("node_modules")], 
   module: {
     loaders: [
-      { test: /\.ts(x?)$/, loader: 'ts-loader' },
-      { test: /\.json$/, loader: 'json-loader' }
+      { test: /\.ts(x?)$/, exclude: '/node_modules' , loader: 'ts-loader'},
+      { test: /\.json$/, exclude: '/node_modules' , loader: 'json-loader' }
     ]
   },
   resolve: {
@@ -16,7 +23,15 @@ module.exports = {
   },
   output: {
     libraryTarget: 'commonjs',
-    path: path.join(__dirname, '.webpack'),
-    filename: 'src/handler.js'
+    //path: './',
+    path: path.join(__dirname, './dist/'),
+    filename: 'handler.js'
   },
+  plugins: [
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
+        })
+    ]
 };

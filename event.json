@@ -8,6 +8,6 @@
   "body": {},
   "path": {},
   "query": {
-    "foo": "bar"
+    "term": "ads"
   }
 }

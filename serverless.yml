@@ -23,11 +23,11 @@ package:
   exclude:
     - /node_modules
     - event.json
-    - */*.json
+    - /*.json
 
 functions:
-  cars:
-    handler: handler.cars
+  ads:
+    handler: handler.ads
     events:
       - http:
          path: index
