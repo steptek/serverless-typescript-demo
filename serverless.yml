@@ -19,6 +19,12 @@ provider:
 plugins:
   - serverless-webpack
 
+package:
+  exclude:
+    - /node_modules
+    - event.json
+    - */*.json
+
 functions:
   cars:
     handler: handler.cars
